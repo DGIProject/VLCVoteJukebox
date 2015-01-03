@@ -1,14 +1,18 @@
 
 <?php
-// Dans les versions de PHP antiéreures à 4.1.0, la variable $HTTP_POST_FILES
-// doit être utilisée à la place de la variable $_FILES.
 
+include_once("sql.php");
+include_once("functionFileSend.php");
 
+$time = time();
 
-if (is_uploaded_file($_FILES['list']['tmp_name']))
+if (is_uploaded_file($_FILES['list']['tmp_name']) && isset($_POST['name']))
 {
     echo 'success';
-    move_uploaded_file($_FILES['list']['tmp_name'], "../data/".$_FILES['list']['name']);
+    if(move_uploaded_file($_FILES['list']['tmp_name'], "../data/".$time.'.lst'))
+    {
+        addList($_POST['name'], $time);
+    }
 }
 else
 {
