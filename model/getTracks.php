@@ -33,7 +33,6 @@ function getAlbum($listId, $creator)
     return $rep;
 }
 
-
 function getTracks($listId, $album, $creator)
 {
     global $bdd;
@@ -46,7 +45,45 @@ function getTracks($listId, $album, $creator)
     $rep = $req->fetchAll();
     return $rep;
 }
-$data = getData($_GET['listId']);
+function getNameList($id)
+{
+    global $bdd;
+    $req = $bdd->prepare("SELECT name FROM lists WHERE id =?");
+    if (!$req->execute(array($id)))
+    {
+        print_r($req->errorInfo());
+        exit(0);
+    }
+    $rep = $req->fetch();
+    return $rep[0];
+}
+
+function getAlbums($listId)
+{
+    global $bdd;
+    $req = $bdd->prepare("SELECT album, creator FROM tracks WHERE listId = ? GROUP BY album");
+    if (!$req->execute(array($listId)))
+    {
+        print_r($req->errorInfo());
+        exit(0);
+    }
+    $rep = $req->fetchAll();
+    return $rep;
+}
+
+function getTracksByAlbum($listId, $album)
+{
+    global $bdd;
+    $req = $bdd->prepare("SELECT title FROM tracks WHERE listId = ? AND album = ?");
+    if (!$req->execute(array($listId, $album)))
+    {
+        print_r($req->errorInfo());
+        exit(0);
+    }
+    $rep = $req->fetchAll();
+    return $rep;
+}
+
 
 //print_r($data);
 //exit(0);
