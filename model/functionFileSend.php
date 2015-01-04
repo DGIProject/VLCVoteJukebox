@@ -9,5 +9,5 @@ function addList($name,$time)
         return $req->errorInfo();
     }
 
-    return true;
+    return $bdd->lastInsertId();
 }

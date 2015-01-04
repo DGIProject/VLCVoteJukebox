@@ -1,11 +1,11 @@
 <?php
 
 
-function addTrack($title , $creator , $album)
+function addTrack($listId, $title , $creator , $album)
 {
     global $bdd;
-    $req =  $bdd->prepare("INSERT INTO tracks(title,creator, album) VALUES(?, ?, ?)");
-    if(!$req->execute(array($title, $creator, $album)))
+    $req =  $bdd->prepare("INSERT INTO tracks(listId,title,creator, album) VALUES(?,?, ?, ?)");
+    if(!$req->execute(array($listId,$title, $creator, $album)))
     {
         print_r( $req->errorInfo());
         exit(1);
