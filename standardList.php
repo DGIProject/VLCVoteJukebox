@@ -44,8 +44,10 @@
                 <h3><?php echo $nameList ?></h3>
                 <div class="btn-group" role="group" aria-label="...">
                     <a href="getList.php?listId=<?php echo $_GET['listId'] ?>&view=2" class="btn btn-default">Album</a>
-                    <a href="getList.php?listId=<?php echo $_GET['listId'] ?>&view=1" class="btn btn-default">Standard</a>
+                    <a href="getList.php?listId=<?php echo $_GET['listId'] ?>&view=1" class="btn btn-default active">Standard</a>
                 </div>
+                <a href="startVote.php?listId=<?php echo $_GET['listId'] ?>" class="btn btn-primary btn-lg active">Lancer un vote</a>
+
                 <br/><br/><br/>
                 <div class="panel-group" id="accordionArtist" role="tablist" aria-multiselectable="true">
                     <?php
